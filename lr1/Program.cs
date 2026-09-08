@@ -7,7 +7,6 @@ namespace LibraryCatalog
     {
         static void Main(string[] args)
         {
-            // Устанавливаем кодировку UTF-8 для корректного отображения русских символов
             Console.OutputEncoding = Encoding.UTF8;
 
             Console.WriteLine("Проект: LibraryCatalog");
