@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using lr2.Data;
 
 namespace lr2.Logic
 {
     public class BookService
     {
-        private readonly BookRepository _repository = new();
+        private readonly IBookRepository _repository;
+
+        public BookService(IBookRepository repository)
+        {
+            _repository = repository;
+        }
 
         public List<Book> GetImportant()
         {
