@@ -1,12 +1,13 @@
-﻿using System;
+﻿using lr2.Logic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace lr2.Data
+namespace lr2.Data 
 {
-    public class BookRepository
+    public class BookRepository : IBookRepository
     {
         private readonly List<Book> _books = new()
         {

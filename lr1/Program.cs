@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Text;
+using lr2.Data;
 using lr2.Logic;
 
-var service = new BookService();
+IBookRepository repository = new BookRepository();
+
+var service = new BookService(repository);
 
 Console.WriteLine("Отобранные записи");
 
