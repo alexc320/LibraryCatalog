@@ -3,16 +3,61 @@ using System.Text;
 using lr2.Data;
 using lr2.Logic;
 
-IBookRepository repository = new BookRepository();
+string jsonPath = Path.Combine(AppContext.BaseDirectory, "books.json");
+string xmlPath = Path.Combine(AppContext.BaseDirectory, "books.xml");
+
+string kind = args.Length > 0 ? args[0] : "json";
+
+IBookRepository repository;
+switch (kind)
+{
+    case "xml":
+        repository = new XmlBookRepository(xmlPath);
+        break;
+    case "memory":
+        repository = new BookRepository();
+        break;
+    default:
+        repository = new JsonBookRepository(jsonPath);
+        break;
+}
+
+Console.WriteLine($"Хранилище: {kind}");
 
 var service = new BookService(repository);
 
-Console.WriteLine("Отобранные записи");
+Console.Write("Название новой книги: ");
+string title = Console.ReadLine() ?? "";
 
+int year;
+while (true)
+{
+    Console.Write("Год издания: ");
+    string? input = Console.ReadLine();
+    if (int.TryParse(input, out year) && year > 0)
+    {
+        break;
+    }
+    Console.WriteLine("Введите корректную дату издания");
+}
+
+service.AddBook(title, year);
+Console.WriteLine("Отобранные записи:");
 foreach (var book in service.GetImportant())
 {
     Console.WriteLine($"{book.Id}: {book.Title}");
 }
+
+var oldestBook = service.GetOldestBook();
+if (oldestBook != null)
+{
+    Console.WriteLine($"Самая старая книга: {oldestBook.Title} ({oldestBook.Year} год)");
+}
+else
+{
+    Console.WriteLine("Книги в каталоге отсутствуют");
+}
+
 
 //namespace LibraryCatalog
 //{
