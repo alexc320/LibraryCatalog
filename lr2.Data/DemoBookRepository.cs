@@ -16,5 +16,15 @@ namespace lr2.Data
                 new Book {Id = 100, Title = "Демонстрационная запись", Year = 1991}
             };
         }
+
+        public void AddBook(Book book)
+        {
+        
+        }
+
+        public void Add(Book book)
+        {
+
+        }
     }
 }

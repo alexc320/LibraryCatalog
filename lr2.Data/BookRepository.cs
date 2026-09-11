@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace lr2.Data 
 {
+
     public class BookRepository : IBookRepository
     {
         private readonly List<Book> _books = new()
@@ -19,6 +20,11 @@ namespace lr2.Data
         public List<Book> GetAll()
         {
             return _books;
+        }
+
+        public void Add(Book book)
+        {
+            _books.Add(book);
         }
     }
 }
