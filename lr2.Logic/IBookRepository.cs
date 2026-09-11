@@ -9,5 +9,6 @@ namespace lr2.Logic
     public interface IBookRepository
     {
         List<Book> GetAll();
+        void Add(Book book);
     }
 }
